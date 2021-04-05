@@ -84,8 +84,8 @@ CuOOra >> addUser: aUser [
 CuOOra >> initialize [
 	"creates empty collections of users & topics"
 
-	users := OrderedCollection new.
-	topics := OrderedCollection new.
+	users:= OrderedCollection new.
+	topics:= OrderedCollection new.
 ]
 
 { #category : #enumerating }

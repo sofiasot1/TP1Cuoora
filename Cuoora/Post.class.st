@@ -108,8 +108,7 @@ Post >> text: aText [
 ]
 
 { #category : #'as yet unclassified' }
-Post >> withOwner:aUser andText: aText [
-
-owner:=aUser.
-text:=aText.
+Post >> withOwner: aUser andText: aText [
+	owner := aUser.
+	text := aText
 ]

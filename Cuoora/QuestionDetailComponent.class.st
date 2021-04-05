@@ -34,7 +34,7 @@ QuestionDetailComponent >> renderAnswer: anAnswer on: html [
 		paragraph: [ self
 				renderReactionAction: 'Like'
 				on: html
-				with: [ anAnswer addDislike: self session user ].
+				with: [ anAnswer addLike: self session user ].
 			html space.
 			self
 				renderReactionAction: 'Dislike'

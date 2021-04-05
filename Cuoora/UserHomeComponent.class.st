@@ -42,3 +42,12 @@ UserHomeComponent >> renderHomepage: html [
 		table: [ self relevantQuestions
 				do: [ :question | self renderQuestion: question on: html ] ]
 ]
+
+{ #category : #rendering }
+UserHomeComponent >> style [ 
+	^ '.nav li {
+  		display: inline-block;
+  		font-size: 20px;
+  		padding: 20px;
+	}'
+]

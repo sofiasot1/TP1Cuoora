@@ -40,7 +40,7 @@ AbstractUserHomeComponent >> renderHeader: html [
 			html strong: self session user username.
 			html
 				paragraph: [ html anchor
-						callback: [ self answer ];
+						callback: [ self session presenter home ];
 						with: 'Log Out' ] ].
 			html horizontalRule.
 ]

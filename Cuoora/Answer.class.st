@@ -38,5 +38,5 @@ Answer >> initialize [
 { #category : #initialization }
 Answer >> toQuestion: aQuestion [
 	aQuestion addAnswer: self.
-	owner addAnswer: self
+	owner registerAnswer: self toQuestion: aQuestion.
 ]

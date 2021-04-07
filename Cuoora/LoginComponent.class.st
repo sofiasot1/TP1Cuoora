@@ -11,13 +11,16 @@ Class {
 		'password',
 		'cuoora'
 	],
+	#classInstVars : [
+		'initialize'
+	],
 	#category : #'Cuoora-ui'
 }
 
 { #category : #initialization }
 LoginComponent >> initialize [
 	super initialize.
-	cuoora := CuOOra soleInstance sampleData.
+	'cuoora := CuOOra soleInstance sampleData.'
 ]
 
 { #category : #callbacks }

@@ -9,10 +9,10 @@ Class {
 
 { #category : #accessing }
 CuooraSession >> user [
-	^user
+	'^user'
 ]
 
 { #category : #accessing }
 CuooraSession >> user: anObject [ 
-	user := anObject
+	'user := anObject'
 ]

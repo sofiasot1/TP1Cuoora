@@ -66,7 +66,7 @@ AbstractUserHomeComponent >> renderPostText: aPost on: html with: aCallbackBlock
 	html
 		paragraph: [ html anchor
 				callback: aCallbackBlock;
-				with: aPost text ]
+				with: aPost title ]
 ]
 
 { #category : #rendering }

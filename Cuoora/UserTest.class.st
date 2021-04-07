@@ -24,9 +24,9 @@ UserTest >> setUp [
 { #category : #tests }
 UserTest >> testAddAnswer [
 	self assert: user answers size equals: 0.
-	user addAnswer: answer.
-	self assert: user answers size equals: 1.
-	
+	user addQuestion: question.
+	question addAnswer: answer.
+	self assert: question answers size equals: 1.
 ]
 
 { #category : #tests }
@@ -60,14 +60,20 @@ UserTest >> testFollow [
 { #category : #tests }
 UserTest >> testScore [
 	self assert: user score equals: 0.
-	user addAnswer: answer.
-	self assert: user score equals: 50.
+	question addAnswer: answer.
 	user addQuestion: question.
+	user registerAnswer: answer  toQuestion: question .
+	self assert: user score equals: 70.
+	question addAnswer: answer.
+	user addQuestion: question.
+	user registerAnswer: answer toQuestion: question .
+	self assert: user score equals: 140.
+	'user addQuestion: question.
 	self assert: user score equals: 70.
 	answer addDislike: (Reaction withUser: user).
 	self assert: user score equals: 69.
 	answer addDislike: (Reaction withUser: user_followed).
 	self assert: user score equals: 68.
 	question addLike: (Reaction withUser: user_followed).
-	self assert: user score equals: 69.
+	self assert: user score equals: 69.'
 ]

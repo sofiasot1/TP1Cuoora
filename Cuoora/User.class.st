@@ -33,11 +33,6 @@ User class >> username: aUsername password: aPassword [
 ]
 
 { #category : #actions }
-User >> addAnswer: anAnswer [
-	answers add: anAnswer.
-]
-
-{ #category : #actions }
 User >> addQuestion: aQuestion [
 	questions add: aQuestion.
 ]
@@ -59,14 +54,13 @@ User >> followed [
 
 { #category : #initialization }
 User >> initialize [
-	
 	registerDate := Date today.
 	registerTime := DateAndTime now.
 	followed := OrderedCollection new.
 	reactions := OrderedCollection new.
 	likedTopics := OrderedCollection new.
 	questions := OrderedCollection new.
-	answers := OrderedCollection new.
+	answers := OrderedCollection new
 ]
 
 { #category : #actions }
@@ -87,6 +81,12 @@ User >> password [
 { #category : #accessing }
 User >> questions [
 	^questions
+]
+
+{ #category : #'as yet unclassified' }
+User >> registerAnswer: anAnswer toQuestion: aQuestion [
+	answers add: anAnswer.
+	aQuestion addAnswer: anAnswer  
 ]
 
 { #category : #actions }

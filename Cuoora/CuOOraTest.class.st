@@ -16,6 +16,7 @@ Class {
 { #category : #tests }
 CuOOraTest >> setUp [ 
 	"Set up the CuOOra environment for testing"
+	super setUp.
 	cuoora := CuOOra new.
 	user := User username: 'pedro' password: '123456'.
 	user_followed := User username: 'juanjo' password: '123456'.

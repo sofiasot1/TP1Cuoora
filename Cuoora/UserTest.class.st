@@ -68,12 +68,10 @@ UserTest >> testScore [
 	user addQuestion: question.
 	user registerAnswer: answer toQuestion: question .
 	self assert: user score equals: 140.
-	'user addQuestion: question.
-	self assert: user score equals: 70.
-	answer addDislike: (Reaction withUser: user).
-	self assert: user score equals: 69.
+		answer addDislike: (Reaction withUser: user).
+	self assert: user score equals: 139.
 	answer addDislike: (Reaction withUser: user_followed).
-	self assert: user score equals: 68.
+	self assert: user score equals: 138.
 	question addLike: (Reaction withUser: user_followed).
-	self assert: user score equals: 69.'
+	self assert: user score equals: 139.
 ]

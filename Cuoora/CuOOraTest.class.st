@@ -90,3 +90,14 @@ CuOOraTest >> testRelevantQuestionsForUser [
 	self assert: (relevant_questions includes: q3).
 	
 ]
+
+{ #category : #tests }
+CuOOraTest >> testsearchForUser [
+	| logged_user |
+	self assert: user likedTopics size equals: 0.
+	cuoora addUser: user.
+	logged_user := cuoora searchForUser: 'pedro' password: '123456'.
+	self assert: logged_user equals: user.
+	logged_user := cuoora searchForUser: 'unexistent_user' password: '123456'.
+	self assert: logged_user equals: nil.
+]

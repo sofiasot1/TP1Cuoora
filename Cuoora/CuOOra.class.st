@@ -149,6 +149,11 @@ CuOOra >> sampleData [
 	^ self
 ]
 
+{ #category : #enumerating }
+CuOOra >> searchForUser: username password: password [
+	^ users detect: [:user | (user username = username) and: (user password = password)] ifNone: [ nil ].
+]
+
 { #category : #accessing }
 CuOOra >> topics [
 	^topics

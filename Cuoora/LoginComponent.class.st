@@ -26,7 +26,7 @@ LoginComponent >> initialize [
 { #category : #callbacks }
 LoginComponent >> login [
 	| logged_user home_component|
-	logged_user := cuoora loginWith: username password: password.
+	logged_user := cuoora searchForUser: username password: password.
 	logged_user ifNotNil:  [ 
 			self session user: logged_user.
 			home_component := UserHomeComponent new.

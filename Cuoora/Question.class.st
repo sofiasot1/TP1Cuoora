@@ -36,20 +36,6 @@ Question >> answersOrderedByScore [
 		asSortedCollection: [ :answer1 :answer2 | answer1 score > answer2 score ]
 ]
 
-{ #category : #actions }
-Question >> commonTopics: userTopics [
-	(0 < (userTopics intersect: topics) size)
-   		ifTrue: [ ^ self ]
-]
-
-{ #category : #actions }
-Question >> hasTopic: aTopic [
-	"checks if question has aTopic in its topics collection"
-
-	(topics includes: aTopic)
-		ifTrue: [ ^ self ]
-]
-
 { #category : #initialization }
 Question >> initialize [
 	"comment stating purpose of message"

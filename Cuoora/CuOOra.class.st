@@ -137,15 +137,15 @@ CuOOra >> sampleData [
 		text: '¿Para qué sirve el método SetUp?'
 		user: diego.
 	Answer
-		answer: pedro_pregunta
+		fromOwner: diego
 		withText:
 			'Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.'
-		user: diego.
+		toQuestion: pedro_pregunta.
 	Answer
-		answer: diego_pregunta
+		fromOwner: pedro
 		withText:
 			'Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.'
-		user: pedro.
+		toQuestion: diego_pregunta.
 	^ self
 ]
 

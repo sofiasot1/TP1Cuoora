@@ -28,26 +28,27 @@ Post >> <= anotherQuestion [
 { #category : #actions }
 Post >> addDislike: aUser [
 	"adds reaction to collection of dislikes"
-	| detect_block new_reaction |
+	| new_reaction |
 	
-	new_reaction:= Reaction withUser: aUser.
-	detect_block := [:reaction | reaction isEqualTo: new_reaction].
-	dislikes
-   		detect: detect_block
-   		ifNone: [ dislikes add: new_reaction ].
-	likes := likes reject: detect_block.
+	new_reaction := Reaction withUser:aUser.
+	"(dislikes anySatisfy:[:each| each owner = aUser ]) ifTrue:[^nil] ifFalse:[dislikes add:new_reaction]."
+	
+	dislikes detect:[:each  | each owner  == aUser] ifFound: [:each |dislikes remove:each] ifNone:[dislikes add: new_reaction]. 
+
+likes detect:[:each  | each owner  == aUser]ifFound: [:each |likes remove:each].
+
 ]
 
 { #category : #actions }
 Post >> addLike: aUser [
-	"adds user to collection of users"
-	| detect_block new_reaction |
+	
+	| new_reaction |
+	
 	new_reaction:= Reaction withUser: aUser.
-	detect_block := [:reaction | reaction isEqualTo: new_reaction].
-	likes
-   		detect: detect_block
-   		ifNone: [ likes add: new_reaction ].
-	dislikes:= dislikes reject: detect_block.
+	
+	likes detect:[:each  | each owner  == aUser] ifFound: [:each |likes remove:each] ifNone:[likes add: new_reaction]. 
+	
+	dislikes detect:[:each  | each owner  == aUser]ifFound: [:each |dislikes remove:each].
 ]
 
 { #category : #accessing }

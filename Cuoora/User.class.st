@@ -104,11 +104,13 @@ User >> score [
 	"Calculates and returns the score of a User.
 	20 points per question, 50 points per answer and
 	the score of each of them."
-	|totalScore|
+	|totalScore finalAnswers|
+	
+	finalAnswers:= answers reject:[:each| each question owner == self ].
 	totalScore := questions inject: 0 into: [ :sum :q | q score ].
 	totalScore := totalScore + (answers inject: 0 into: [ :sum :ans | ans score ]).
 	totalScore := totalScore + (questions size * 20).
-	totalScore := totalScore + (answers size * 50).
+	totalScore := totalScore + (finalAnswers size * 50).
 	^totalScore
 ]
 

@@ -6,19 +6,27 @@ Class {
 		'answer',
 		'user',
 		'user_followed',
-		'programming_topic'
+		'programming_topic',
+		'topicslist',
+		'topic1',
+		'question2',
+		'answer2'
 	],
 	#category : #'Cuoora-test'
 }
 
 { #category : #running }
 UserTest >> setUp [
+
 	super setUp.
+	topicslist:=OrderedCollection new.
 	user := User username: 'pedro' password: '123456'.
 	user_followed := User username: 'juanjo' password: '123456'.
+	user follow: user_followed.
 	programming_topic  := Topic name: 'programming' description: 'general programming questions'.
-	question := Question new.
-	answer := Answer new.
+	
+   topic1:=Topic name: 'smalltalk' description: 'programming language smalltalk'.
+   topicslist add: topic1.	
 ]
 
 { #category : #tests }
@@ -44,34 +52,41 @@ UserTest >> testAddQuestion [
 ]
 
 { #category : #tests }
-UserTest >> testCheckPassword [
-	self assert: user likedTopics size equals: 0.
-	user likeTopic: programming_topic.
-	self assert: user likedTopics size equals: 1.
-]
-
-{ #category : #tests }
 UserTest >> testFollow [
-	self assert: user followed size equals: 0.
-	user follow: user_followed.
-	self assert: user followed size equals: 1
+	self assert: user_followed followed size equals: 0.
+	user_followed follow:user.
+	self assert: user_followed followed size equals: 1
 ]
 
 { #category : #tests }
 UserTest >> testScore [
 	self assert: user score equals: 0.
-	question addAnswer: answer.
-	user addQuestion: question.
-	user registerAnswer: answer  toQuestion: question .
+   question := Question withTopics: topicslist  title: 'sdada' text: 'dasdasd' user: user.
+	answer := Answer fromOwner:user  withText:'a text' toQuestion:question.
+	
+	self assert: user score equals: 20.
+	question2 := Question
+		withTopics: topicslist
+		title: 'atitle'
+		text: 'dasdasd'
+		user: user_followed.
+	answer2 := Answer
+		fromOwner: user
+		withText: 'a text'
+		toQuestion: question2.
+	
+	self assert:user answers size equals:2.
 	self assert: user score equals: 70.
-	question addAnswer: answer.
-	user addQuestion: question.
-	user registerAnswer: answer toQuestion: question .
-	self assert: user score equals: 140.
-		answer addDislike: (Reaction withUser: user).
-	self assert: user score equals: 139.
-	answer addDislike: (Reaction withUser: user_followed).
-	self assert: user score equals: 138.
-	question addLike: (Reaction withUser: user_followed).
-	self assert: user score equals: 139.
+	self assert: answer dislikes  equals:0.
+	answer addDislike: user_followed.
+	self assert: answer dislikes equals:1.
+	answer addDislike: user_followed.
+	self assert: answer dislikes equals:0.
+	answer addDislike: user.
+	self assert: answer dislikes equals:1.
+   answer addLike: user.
+	self assert: answer dislikes equals:0.
+   self assert: answer likes equals:1.	
+	"question addLike: (Reaction withUser: user_followed).
+	self assert: user score equals: 68." 
 ]

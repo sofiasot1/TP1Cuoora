@@ -18,14 +18,14 @@ Answer class >> fromOwner:aUser withText:aText toQuestion:aQuestion [
 	
 ]
 
-{ #category : #initialization }
-Answer >> initialize [
-	super initialize.
-	
+{ #category : #accessing }
+Answer >> question [
+^question
 ]
 
 { #category : #initialization }
 Answer >> toQuestion: aQuestion [
+   question:=aQuestion.
 	aQuestion addAnswer: self.
 	owner registerAnswer: self toQuestion: aQuestion.
 ]

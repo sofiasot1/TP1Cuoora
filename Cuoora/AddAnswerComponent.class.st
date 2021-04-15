@@ -21,7 +21,8 @@ AddAnswerComponent >> cancelar [
 
 { #category : #'as yet unclassified' }
 AddAnswerComponent >> guardar [
-	Answer answer: question withText: text user: self session user. 
+	"Answer answer: question withText: text user: self session user. "
+	Answer fromOwner: self session user withText: text toQuestion: question.
 	self answer.
 ]
 
@@ -30,7 +31,7 @@ AddAnswerComponent >> renderContentOn: html [
 	super renderContentOn: html.
 	html
 		form: [ html
-				paragraph: [ html label: 'RESPUESTA: '.
+				paragraph: [ html label: 'Respuesta: '.
 					html textArea columns: 60; rows: 8; on: #text of: self ].
 			html button
 				callback: [ self cancelar ];

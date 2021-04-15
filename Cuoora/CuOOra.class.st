@@ -38,20 +38,19 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CuOOra class >> clearSoleInstance [ 
-	soleInstance := nil. 
+CuOOra class >> clearSoleInstance [
+	soleInstance := nil
 ]
 
 { #category : #'as yet unclassified' }
-CuOOra class >> resetInstance [ 
-	soleInstance := self new. 
+CuOOra class >> resetInstance [
+	soleInstance := self new
 ]
 
 { #category : #'instance creation' }
 CuOOra class >> soleInstance [
 	soleInstance ifNil: [ soleInstance := self new ].
-	^soleInstance
-	
+	^ soleInstance
 ]
 
 { #category : #adding }
@@ -68,9 +67,9 @@ CuOOra >> addTopics: aTopicList [
 	aTopicList
 		do: [ :newTopic | 
 			topics
-				detect: [ :topic | topic name = newTopic  ]
+				detect: [ :topic | topic name = newTopic ]
 				ifNone: [ topics add: (Topic name: newTopic description: '') ] ].
-	^topics select:  [ :topic | aTopicList includes: (topic name) ]
+	^ topics select: [ :topic | aTopicList includes: topic name ]
 ]
 
 { #category : #adding }
@@ -84,41 +83,39 @@ CuOOra >> addUser: aUser [
 CuOOra >> initialize [
 	"creates empty collections of users & topics"
 
-	users:= OrderedCollection new.
-	topics:= OrderedCollection new.
+	users := OrderedCollection new.
+	topics := OrderedCollection new
 ]
 
 { #category : #enumerating }
 CuOOra >> loginWith: username password: password [
-	^ users detect: [:user | (user username = username) and: (user password = password)] ifNone: [ nil ].
+	^ users
+		detect: [ :user | user username = username and: user password = password ]
+		ifNone: [ nil ]
 ]
 
 { #category : #enumerating }
 CuOOra >> relevantQuestionsForUser: aUser [
 	| resultQuestions |
-	
 	resultQuestions := Set new.
-	aUser likedTopics do: [ :topic | resultQuestions addAll: (topic questions) ].
-	aUser followed do: [ :user | resultQuestions addAll: (user questions) ].
-	
-  	^ resultQuestions
+	aUser likedTopics
+		do: [ :topic | resultQuestions addAll: topic questions ].
+	aUser followed do: [ :user | resultQuestions addAll: user questions ].
+	^ resultQuestions
 ]
 
 { #category : #accessing }
 CuOOra >> sampleData [
 	| pedro diego juan oo1 smalltalk unit_test pedro_pregunta diego_pregunta |
-	pedro := User
-		username: 'pedro@cuoora.com'
-		password: 'pedro@cuoora.com'.
-	diego := User
-		username: 'diego@cuoora.com'
-		password: 'diego@cuoora.com'.
+	pedro := User username: 'pedro@cuoora.com' password: 'pedro@cuoora.com'.
+	diego := User username: 'diego@cuoora.com' password: 'diego@cuoora.com'.
 	juan := User username: 'juan@cuoora.com' password: 'juan@cuoora.com'.
 	self addUser: pedro.
 	self addUser: diego.
 	self addUser: juan.
 	juan follow: diego.
 	pedro follow: juan.
+	diego follow: pedro.
 	oo1 := Topic name: 'OO1' description: 'Preguntas de OO1'.
 	smalltalk := Topic
 		name: 'Smalltalk'
@@ -151,15 +148,17 @@ CuOOra >> sampleData [
 
 { #category : #enumerating }
 CuOOra >> searchForUser: username password: password [
-	^ users detect: [:user | (user username = username) and: (user password = password)] ifNone: [ nil ].
+	^ users
+		detect: [ :user | user username = username and: user password = password ]
+		ifNone: [ nil ]
 ]
 
 { #category : #accessing }
 CuOOra >> topics [
-	^topics
+	^ topics
 ]
 
 { #category : #accessing }
-CuOOra >> users [ 
-	^users
+CuOOra >> users [
+	^ users
 ]

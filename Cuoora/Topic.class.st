@@ -30,43 +30,41 @@ Topic >> addQuestion: aQuestion [
 
 { #category : #initialization }
 Topic >> description [
-	^description
+	^ description
 ]
 
 { #category : #initialization }
 Topic >> description: aDescription [
-	description := aDescription 
+	description := aDescription
 ]
 
 { #category : #initialization }
-Topic >> initialize [ 
-	questions := OrderedCollection new.
+Topic >> initialize [
+	questions := OrderedCollection new
 ]
 
 { #category : #initialization }
 Topic >> name [
-	^name
-	
+	^ name
 ]
 
 { #category : #initialization }
 Topic >> name: aName [
-	name := aName  
-	
+	name := aName
 ]
 
 { #category : #initialization }
 Topic >> name: aName description: aDescription [
 	name := aName.
-	description := aDescription. 
+	description := aDescription
 ]
 
 { #category : #initialization }
 Topic >> questions [
-	^questions
+	^ questions
 ]
 
 { #category : #initialization }
 Topic >> removeQuestion: aQuestion [
-	questions remove: aQuestion ifAbsent: [ ^nil ]
+	questions remove: aQuestion ifAbsent: [ ^ nil ]
 ]

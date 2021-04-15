@@ -10,27 +10,20 @@ Class {
 
 { #category : #accessing }
 Reaction class >> withUser: anUser [
-	^self new withUser: anUser.
+	^ self new withUser: anUser
 ]
 
 { #category : #initialization }
-Reaction >> initialize [ 
-	creationDate:= Date today. 
-]
-
-{ #category : #initialization }
-Reaction >> isEqualTo: anotherReaction [
-   owner = anotherReaction owner 
-		ifTrue: [ ^true ]
-		ifFalse: [ ^false ]
+Reaction >> initialize [
+	creationDate := Date today
 ]
 
 { #category : #initialization }
 Reaction >> owner [
-	^owner
+	^ owner
 ]
 
 { #category : #initialization }
 Reaction >> withUser: anUser [
-	owner := anUser. 
+	owner := anUser
 ]

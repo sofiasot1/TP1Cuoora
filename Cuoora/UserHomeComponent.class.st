@@ -26,21 +26,54 @@ UserHomeComponent >> relevantQuestions [
 { #category : #rendering }
 UserHomeComponent >> renderContentOn: html [
 	super renderContentOn: html.
-	self renderHomepage: html.
+	self renderHomepage: html
+]
+
+{ #category : #rendering }
+UserHomeComponent >> renderFriendsOn: html [
+	html strong: 'Mis amigxs: '.
+	html
+		unorderedList: [ self session user followed
+				do: [ :friend | html listItem: friend username ] ]
 ]
 
 { #category : #rendering }
 UserHomeComponent >> renderHomepage: html [
+	"html
+		anchor: [ html anchor
+			callback: [self renderFriendsOn: html ];
+				with: 'Mis amigos'].
+		
+	html
+		anchor: [ html anchor
+				callback: [ self renderQuestionsOn: html ];
+				with: 'Mis preguntas' ]."
+
 	html
 		paragraph: [ html anchor
 				callback: [ self createQuestion ];
 				with: 'Hacer una nueva pregunta' ].
+	
+	html horizontalRule.
+			
 	html heading
 		level2;
-		with: 'Ultimas preguntas'.
+		with: 'Últimas preguntas'.
 	html
 		table: [ self relevantQuestions
-				do: [ :question | self renderQuestion: question on: html ] ]
+				do: [ :question | self renderQuestion: question on: html ] ].
+			
+		
+	self renderFriendsOn: html.
+	self renderQuestionsOn: html.
+]
+
+{ #category : #rendering }
+UserHomeComponent >> renderQuestionsOn: html [
+	html strong: 'Mis preguntas: '.
+	html
+		unorderedList: [ self session user questions
+				do: [ :question | html listItem: question title ] ]
 ]
 
 { #category : #rendering }

@@ -29,27 +29,30 @@ Class {
 
 { #category : #'instance creation' }
 User class >> username: aUsername password: aPassword [
-	^self new username: aUsername password: aPassword 
+	^ self new username: aUsername password: aPassword
 ]
 
 { #category : #actions }
 User >> addQuestion: aQuestion [
-	questions add: aQuestion.
+	questions add: aQuestion
 ]
 
 { #category : #accessing }
 User >> answers [
-	^answers
+	^ answers
 ]
 
 { #category : #actions }
-User >> follow: aUser [ 
-	followed add: aUser
+User >> follow: aUser [
+	followed
+		detect: [ :each | each username == aUser username ]
+		ifFound: [ ^ nil ]
+		ifNone: [ followed add: aUser ]
 ]
 
 { #category : #accessing }
 User >> followed [
-	^followed
+	^ followed
 ]
 
 { #category : #initialization }
@@ -65,62 +68,68 @@ User >> initialize [
 
 { #category : #actions }
 User >> likeTopic: aTopic [
-	likedTopics add: aTopic.
+	likedTopics add: aTopic
 ]
 
 { #category : #accessing }
 User >> likedTopics [
-	^likedTopics
+	^ likedTopics
 ]
 
 { #category : #accessing }
-User >> password [ 
-	^password
+User >> password [
+	^ password
 ]
 
 { #category : #accessing }
 User >> questions [
-	^questions
+	^ questions
+]
+
+{ #category : #'as yet unclassified' }
+User >> registerAnswer: anAnswer [
+	answers add: anAnswer.
 ]
 
 { #category : #'as yet unclassified' }
 User >> registerAnswer: anAnswer toQuestion: aQuestion [
 	answers add: anAnswer.
-	aQuestion addAnswer: anAnswer  
 ]
 
 { #category : #actions }
 User >> removeAnswer: anAnswer [
-	answers remove: anAnswer.
+	answers remove: anAnswer
 ]
 
 { #category : #actions }
 User >> removeQuestion: aQuestion [
-	questions remove: aQuestion.
+	questions remove: aQuestion
 ]
 
 { #category : #calculating }
-User >> score [ 
+User >> score [
 	"Calculates and returns the score of a User.
 	20 points per question, 50 points per answer and
 	the score of each of them."
-	|totalScore finalAnswers|
-	
-	finalAnswers:= answers reject:[:each| each question owner == self ].
+
+	| totalScore finalAnswers |
+	finalAnswers := answers
+		reject: [ :each | each question owner == self ].
 	totalScore := questions inject: 0 into: [ :sum :q | q score ].
-	totalScore := totalScore + (answers inject: 0 into: [ :sum :ans | ans score ]).
+	totalScore := totalScore
+		+ (answers inject: 0 into: [ :sum :ans | ans score ]).
 	totalScore := totalScore + (questions size * 20).
 	totalScore := totalScore + (finalAnswers size * 50).
-	^totalScore
+	^ totalScore
 ]
 
 { #category : #accessing }
 User >> username [
-	^username
+	^ username
 ]
 
 { #category : #'instance creation' }
 User >> username: aUsername password: aPassword [
 	username := aUsername.
-	password := aPassword. 
+	password := aPassword
 ]

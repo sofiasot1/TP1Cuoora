@@ -13,10 +13,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Post class >> withOwner:aUser andText: aText [
-
-^self new withOwner:aUser andText: aText.
-
+Post class >> withOwner: aUser andText: aText [
+	^ self new withOwner: aUser andText: aText
 ]
 
 { #category : #accessing }
@@ -28,27 +26,29 @@ Post >> <= anotherQuestion [
 { #category : #actions }
 Post >> addDislike: aUser [
 	"adds reaction to collection of dislikes"
+
 	| new_reaction |
-	
-	new_reaction := Reaction withUser:aUser.
-	"(dislikes anySatisfy:[:each| each owner = aUser ]) ifTrue:[^nil] ifFalse:[dislikes add:new_reaction]."
-	
-	dislikes detect:[:each  | each owner  == aUser] ifFound: [:each |dislikes remove:each] ifNone:[dislikes add: new_reaction]. 
-
-likes detect:[:each  | each owner  == aUser]ifFound: [:each |likes remove:each].
-
+	new_reaction := Reaction withUser: aUser.
+	dislikes
+		detect: [ :each | each owner == aUser ]
+		ifFound: [ :each | dislikes remove: each ]
+		ifNone: [ dislikes add: new_reaction ].
+	likes
+		detect: [ :each | each owner == aUser ]
+		ifFound: [ :each | likes remove: each ]
 ]
 
 { #category : #actions }
 Post >> addLike: aUser [
-	
 	| new_reaction |
-	
-	new_reaction:= Reaction withUser: aUser.
-	
-	likes detect:[:each  | each owner  == aUser] ifFound: [:each |likes remove:each] ifNone:[likes add: new_reaction]. 
-	
-	dislikes detect:[:each  | each owner  == aUser]ifFound: [:each |dislikes remove:each].
+	new_reaction := Reaction withUser: aUser.
+	likes
+		detect: [ :each | each owner == aUser ]
+		ifFound: [ :each | likes remove: each ]
+		ifNone: [ likes add: new_reaction ].
+	dislikes
+		detect: [ :each | each owner == aUser ]
+		ifFound: [ :each | dislikes remove: each ]
 ]
 
 { #category : #accessing }
@@ -83,7 +83,6 @@ Post >> owner [
 
 { #category : #accessing }
 Post >> owner: anOwner [
-
 	owner := anOwner
 ]
 
@@ -104,7 +103,6 @@ Post >> text [
 
 { #category : #accessing }
 Post >> text: aText [
-	
 	text := aText
 ]
 

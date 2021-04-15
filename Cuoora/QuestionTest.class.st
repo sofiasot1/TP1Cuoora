@@ -19,7 +19,9 @@ QuestionTest >> setUp [
 
 	super setUp.
 	topics := OrderedCollection new.
-	t1 := Topic name: 'pasatiempos' description: 'ideas para pasar el verano'.
+	t1 := Topic
+		name: 'pasatiempos'
+		description: 'ideas para pasar el verano'.
 	t2 := Topic name: 'picnics' description: 'programas para descanso'.
 	topics add: t1.
 	topics add: t2.
@@ -28,7 +30,7 @@ QuestionTest >> setUp [
 		withTopics: topics
 		title: '¿Ideas de juegos y comidas para un fin de semana de calor?'
 		text: 'sin plata ni permisos para viajar, necesito ideas'
-		user: user.
+		user: user
 ]
 
 { #category : #tests }
@@ -55,10 +57,23 @@ QuestionTest >> testAddAnswer [
 ]
 
 { #category : #tests }
+QuestionTest >> testAddDisLike [
+| u2 |
+	self assert: question dislikes equals: 0.
+	question addDislike: user.
+	self assert: question dislikes equals: 1.
+	u2 := User new.
+	question addDislike: u2.
+	self assert: question dislikes equals: 2.
+	question addDislike: u2.
+	self assert: question dislikes equals: 1.
+]
+
+{ #category : #tests }
 QuestionTest >> testRemoveAnswer [
 	question addAnswer: answer1.
 	question addAnswer: answer2.
 	self assert: question answers size equals: 2.
 	question answers remove: answer1.
-	self assert: question answers size equals: 1.
+	self assert: question answers size equals: 1
 ]

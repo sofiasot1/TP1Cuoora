@@ -33,8 +33,7 @@ AbstractUserHomeComponent >> renderContentOn: html [
 { #category : #rendering }
 AbstractUserHomeComponent >> renderHeader: html [
 	html
-		div:
-			[ html heading
+		div: [ html heading
 				level1;
 				with: 'CuOOra'.
 			html strong: self session user username.
@@ -42,7 +41,7 @@ AbstractUserHomeComponent >> renderHeader: html [
 				paragraph: [ html anchor
 						callback: [ self session presenter home ];
 						with: 'Log Out' ] ].
-			html horizontalRule.
+	html horizontalRule
 ]
 
 { #category : #rendering }
@@ -79,21 +78,29 @@ AbstractUserHomeComponent >> renderQuantityOfAnswers: question on: html [
 { #category : #'as yet unclassified' }
 AbstractUserHomeComponent >> renderQuestion: question on: html [
 	html
-		tableRow: [ 
-			self renderPostText: question on: html with: [ self questionDetail: question ].
+		tableRow: [ self
+				renderPostText: question
+				on: html
+				with: [ self questionDetail: question ].
 			self renderQuestionTopics: question on: html.
 			html
-				paragraph: [ 
-					self renderOwnerName: (question ownerName) on: html with: [ self userProfile: question owner ].
-					self renderQuantityOfAnswers: question on: html].
-			self renderPostLikes: question  on: html. 
+				paragraph: [ self
+						renderOwnerName: question ownerName
+						on: html
+						with: [ self userProfile: question owner ].
+					self renderQuantityOfAnswers: question on: html ].
+			self renderPostLikes: question on: html.
 			html
-				paragraph: [
-					self renderReactionAction: 'Like' on: html  with: [ question addLike: self session user].
+				paragraph: [ self
+						renderReactionAction: 'Like'
+						on: html
+						with: [ question addLike: self session user ].
 					html space.
-					self renderReactionAction: 'Dislike' on: html  with: [ question addDislike: self session user]
-					].
-			html horizontalRule.].
+					self
+						renderReactionAction: 'Dislike'
+						on: html
+						with: [ question addDislike: self session user ] ].
+			html horizontalRule ]
 ]
 
 { #category : #rendering }

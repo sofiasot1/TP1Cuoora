@@ -54,11 +54,11 @@ AnswerTest >> testAddLike [
 
 { #category : #tests }
 AnswerTest >> testToQuestion [
-	self assert: question answers size equals: 0.
+	self assert: question answers size equals: 1.
 	answer := Answer
 		fromOwner: user
 		withText: 'pelopincho, tereré y crucigramas. con eso sos el Rey.'
 		toQuestion: question.
-	self assert: question answers size equals: 1.
+	self assert: question answers size equals: 2.
 	self assert: answer question equals: question.
 ]

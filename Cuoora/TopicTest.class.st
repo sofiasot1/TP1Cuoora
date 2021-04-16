@@ -21,11 +21,14 @@ TopicTest >> setUp [
 
 { #category : #tests }
 TopicTest >> testAddQuestion [
+|aux|
 	self assert: topic1 questions size equals: 0.
 	topic1 addQuestion: q1.
 	self assert: topic1 questions size equals: 1.
 	topic1 addQuestion: q2.
-	self assert: topic1 questions size equals: 2
+	self assert: topic1 questions size equals: 2.
+	aux:= topic1 questions anySatisfy:[:each|each ==q1].
+	self assert:aux equals:true.
 ]
 
 { #category : #running }
@@ -38,5 +41,6 @@ TopicTest >> testRemoveQuestion [
 	topic1 removeQuestion: q2.
 	self assert: topic1 questions size equals: 0.
 	topic1 removeQuestion: q1.
-	self assert: topic1 questions size equals: 0
+	self assert: topic1 questions size equals: 0. 
+	self assert:(topic1 questions anySatisfy:[:each|each ==q1])equals:false.
 ]

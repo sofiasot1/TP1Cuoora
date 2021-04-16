@@ -56,8 +56,9 @@ CuOOra class >> soleInstance [
 { #category : #adding }
 CuOOra >> addTopic: aTopic [
 	"adds a new topic to collection of topics"
-
-	topics add: aTopic
+	 
+			topics detect: [ :topic | topic name = aTopic name ]
+				ifNone: [ topics add: aTopic ].
 ]
 
 { #category : #adding }
@@ -75,8 +76,9 @@ CuOOra >> addTopics: aTopicList [
 { #category : #adding }
 CuOOra >> addUser: aUser [
 	"adds a new user to collection of users"
-
-	users add: aUser
+   users detect: [ :each | each username = aUser username ]
+				ifNone: [ users add: aUser ].
+	
 ]
 
 { #category : #initialization }
@@ -85,13 +87,6 @@ CuOOra >> initialize [
 
 	users := OrderedCollection new.
 	topics := OrderedCollection new
-]
-
-{ #category : #enumerating }
-CuOOra >> loginWith: username password: password [
-	^ users
-		detect: [ :user | user username = username and: user password = password ]
-		ifNone: [ nil ]
 ]
 
 { #category : #enumerating }

@@ -71,9 +71,14 @@ QuestionTest >> testAddDisLike [
 
 { #category : #tests }
 QuestionTest >> testRemoveAnswer [
+|aux |
+   answer1:= Answer new.
+   answer2:= Answer new. 
 	question addAnswer: answer1.
 	question addAnswer: answer2.
 	self assert: question answers size equals: 2.
-	question answers remove: answer1.
-	self assert: question answers size equals: 1
+	question answers remove:answer1.
+	self assert: question answers size equals: 1.
+	aux:= question answers anySatisfy:[:each|each == answer1].
+	self assert:aux equals: false.
 ]

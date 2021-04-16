@@ -68,7 +68,9 @@ User >> initialize [
 
 { #category : #actions }
 User >> likeTopic: aTopic [
-	likedTopics add: aTopic
+	 likedTopics  detect:[ :each | each == aTopic]
+				ifNone: [ likedTopics add: aTopic ].
+	
 ]
 
 { #category : #accessing }
@@ -88,11 +90,6 @@ User >> questions [
 
 { #category : #'as yet unclassified' }
 User >> registerAnswer: anAnswer [
-	answers add: anAnswer.
-]
-
-{ #category : #'as yet unclassified' }
-User >> registerAnswer: anAnswer toQuestion: aQuestion [
 	answers add: anAnswer.
 ]
 

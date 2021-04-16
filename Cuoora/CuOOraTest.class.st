@@ -35,37 +35,40 @@ CuOOraTest >> setUp [
 
 { #category : #tests }
 CuOOraTest >> testAddTopic [
+|aux |
 	self assert: cuoora topics size equals: 0.
 	cuoora addTopic: smalltalk_topic.
-	self assert: cuoora topics size equals: 1
+	self assert: cuoora topics size equals: 1.
+	aux:=cuoora topics includes:smalltalk_topic.
+	self assert:aux equals:true.
+	cuoora addTopic: smalltalk_topic.
+	self assert:cuoora topics size equals:1.
 ]
 
 { #category : #tests }
 CuOOraTest >> testAddTopics [
-	| result_topics |
+	| result_topics aux |
+	aux:=false.
 	self assert: cuoora topics size equals: 0.
 	result_topics := cuoora
 		addTopics: ('OO1,Smalltalk,Programming' splitOn: ',').
 	self assert: cuoora topics size equals: 3.
-	self assert: result_topics size equals: 3
+	self assert: result_topics size equals: 3.
+	cuoora topics detect:[:each|each name='Smalltalk']ifFound:[aux:=true].
+	self assert: aux equals: true.
+	
 ]
 
 { #category : #tests }
 CuOOraTest >> testAddUser [
+|aux|
 	self assert: cuoora users size equals: 0.
 	cuoora addUser: user.
-	self assert: cuoora users size equals: 1
-]
-
-{ #category : #tests }
-CuOOraTest >> testLoginWith [
-	| logged_user |
-	self assert: user likedTopics size equals: 0.
+	self assert: cuoora users size equals: 1.
+	aux:=cuoora users includes:user.
+	self assert:aux equals:true.
 	cuoora addUser: user.
-	logged_user := cuoora loginWith: 'pedro' password: '123456'.
-	self assert: logged_user equals: user.
-	logged_user := cuoora loginWith: 'unexistent_user' password: '123456'.
-	self assert: logged_user equals: nil
+	self assert: cuoora users size equals: 1.
 ]
 
 { #category : #tests }

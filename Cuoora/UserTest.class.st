@@ -53,14 +53,18 @@ UserTest >> testAddAnswer [
 UserTest >> testAddLikedTopic [
 	self assert: user likedTopics size equals: 0.
 	user likeTopic: programming_topic.
-	self assert: user likedTopics size equals: 1
+	self assert: user likedTopics size equals: 1.
+	self assert: (user likedTopics includes: programming_topic ) equals:true.
+	user likeTopic: programming_topic.
+   self assert: user likedTopics size equals: 1.
 ]
 
 { #category : #tests }
 UserTest >> testAddQuestion [
 	self assert: user questions size equals: 0.
 	user addQuestion: question.
-	self assert: user questions size equals: 1
+	self assert: user questions size equals: 1.
+	self assert: (user questions includes: question) equals:true.
 ]
 
 { #category : #tests }
@@ -69,7 +73,8 @@ UserTest >> testFollow [
 	user_followed follow: user.
 	self assert: user_followed followed size equals: 1.
 	user_followed follow: user.
-	self assert: user_followed followed size equals: 1
+	self assert: user_followed followed size equals: 1.
+	self assert: (user_followed followed anySatisfy:[:each|each==user ])equals:true. 
 ]
 
 { #category : #tests }
